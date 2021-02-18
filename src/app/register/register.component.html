@@ -1,0 +1,106 @@
+<div class="container my-2 px-5">
+    <br>
+    <h1 class="display-4 text-center">Registration Form</h1>
+    <br>
+    <br>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="fname">First Name</label>
+                <input type="text" class="form-control" id="fname" formControlName="fname">
+                <div *ngIf="registerForm.get('fname').invalid && (registerForm.get('fname').dirty || registerForm.get('fname').touched)"
+                    class="alert alert-danger mt-1 p-0 text-center">
+
+                    <div *ngIf="registerForm.get('fname').errors.required">
+                        First Name is required.
+                    </div>
+                    <div *ngIf="registerForm.get('fname').errors.minlength">
+                        First Name must be at least 5 characters long.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="lname">Last Name</label>
+                <input type="text" class="form-control" id="lname" formControlName="lname">
+                <div *ngIf="registerForm.get('lname').invalid && (registerForm.get('lname').dirty || registerForm.get('lname').touched)"
+                    class="alert alert-danger mt-1 p-0 text-center">
+
+                    <div *ngIf="registerForm.get('lname').errors.required">
+                        Last Name is required.
+                    </div>
+                    <div *ngIf="registerForm.get('lname').errors.minlength">
+                        Last Name must be at least 5 characters long.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="emailid">Email</label>
+            <input type="email" class="form-control" id="emailid" formControlName="email">
+            <div *ngIf="registerForm.get('email').invalid && (registerForm.get('email').dirty || registerForm.get('email').touched)"
+                class="alert alert-danger mt-1 p-0 text-center">
+
+                <div *ngIf="registerForm.get('email').errors.required">
+                    Email ID is required.
+                </div>
+                <div *ngIf="registerForm.get('email').errors.email">
+                    Invalid Email ID.
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password</label>
+            <input type="password" class="form-control" id="pwd" formControlName="pwd">
+            <div *ngIf="registerForm.get('pwd').invalid && (registerForm.get('pwd').dirty || registerForm.get('pwd').touched)"
+                class="alert alert-danger mt-1 p-0 text-center">
+
+                <div *ngIf="registerForm.get('pwd').errors.required">
+                    Password is required.
+                </div>
+                <div *ngIf="registerForm.get('pwd').errors.pwdValue">
+                    Invalid Password.
+                    Min 1 uppercase letter.
+                    Min 1 lowercase letter.
+                    Min 1 special character.
+                    Min 1 number.
+                    Min 8 characters.
+                    Max 30 characters.
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="cpwd">Confirm Password</label>
+            <input type="password" class="form-control" id="cpwd" formControlName="cpwd">
+            <div *ngIf="registerForm.get('cpwd').invalid && (registerForm.get('cpwd').dirty || registerForm.get('cpwd').touched)"
+                class="alert alert-danger mt-1 p-0 text-center">
+
+                <div *ngIf="registerForm.get('cpwd').errors.required">
+                    Confirm Password is required.
+                </div>
+                <div *ngIf="registerForm.get('cpwd').errors.notEquivalent">
+                    Passwords are not matching.
+                </div>
+            </div>
+        </div>
+
+        <label>Role</label>
+        <div class="form-group">
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="emp" name="role" value="emp"
+                    formControlName="role">
+                <label class="custom-control-label" for="emp">Employee</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="man" name="role" value="man"
+                    formControlName="role">
+                <label class="custom-control-label" for="man">Manager</label>
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <button type="submit" class="btn btn-primary mx-auto" [disabled]="registerForm.invalid">REGISTER</button>
+        </div>
+    </form>
+</div>
