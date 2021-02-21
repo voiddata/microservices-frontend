@@ -12,6 +12,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private registerService: RegisterService) { }
 
+  result: string = '';
+
   registerForm: AbstractControl = this.fb.group({
     fname: ['', [Validators.required, Validators.minLength(5)]],
     lname: ['', [Validators.required, Validators.minLength(5)]],
@@ -30,15 +32,19 @@ export class RegisterComponent implements OnInit {
   register() {
 
     let register = new Register();
-    register.fname = this.registerForm.get('fname').value;
-    register.lname = this.registerForm.get('lname').value;
+    register.firstName = this.registerForm.get('fname').value;
+    register.lastName = this.registerForm.get('lname').value;
     register.email = this.registerForm.get('email').value;
-    register.pwd = this.registerForm.get('pwd').value;
-    register.cpwd = this.registerForm.get('cpwd').value;
+    register.password = this.registerForm.get('pwd').value;
     register.role = this.registerForm.get('role').value;
 
     this.registerService.register(register).subscribe(response => {
       console.log(response);
+      if (response.status === 'SUCCESS') {
+        this.result = response.message;
+      } else if (response.status === 'FAILED') {
+        this.result = response.message;
+      }
     });
   }
 

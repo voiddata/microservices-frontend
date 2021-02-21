@@ -1,0 +1,68 @@
+<div class="container my-2 w-25">
+    <br>
+    <h1 class="display-4 text-center">Login Form</h1>
+    <br>
+    <br>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="form-group">
+            <label for="emailid">Email</label>
+            <input type="email" class="form-control" id="emailid" formControlName="email">
+            <div *ngIf="loginForm.get('email').invalid && (loginForm.get('email').dirty || loginForm.get('email').touched)"
+                class="alert alert-danger mt-1 p-0 text-center">
+
+                <div *ngIf="loginForm.get('email').errors.required">
+                    Email ID is required.
+                </div>
+                <div *ngIf="loginForm.get('email').errors.email">
+                    Invalid Email ID.
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password</label>
+            <input type="password" class="form-control" id="pwd" formControlName="pwd">
+            <div *ngIf="loginForm.get('pwd').invalid && (loginForm.get('pwd').dirty || loginForm.get('pwd').touched)"
+                class="alert alert-danger mt-1 p-0 text-center">
+
+                <div *ngIf="loginForm.get('pwd').errors.required">
+                    Password is required.
+                </div>
+            </div>
+        </div>
+
+        <label>Role</label>
+        <div class="form-group">
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="emp" name="role" value="emp"
+                    formControlName="role">
+                <label class="custom-control-label" for="emp">Employee</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="man" name="role" value="man"
+                    formControlName="role">
+                <label class="custom-control-label" for="man">Manager</label>
+            </div>
+        </div>
+        <div class="form-row">
+            <button type="submit" class="btn btn-primary mx-auto" [disabled]="loginForm.invalid" data-toggle="modal"
+                data-target="#exampleModalCenter">LOGIN</button>
+        </div>
+    </form>
+    <br>
+    <br>
+    <div>
+        <button class="btn btn-link" (click)="forgotPassword()">Forgot Password?</button>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                {{ result }}
+            </div>
+        </div>
+    </div>
+</div>
