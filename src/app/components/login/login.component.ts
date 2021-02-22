@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoggedUser } from '../models/LoggedUser';
-import { Login } from '../models/Login';
-import { LoginService } from '../services/login.service';
+import { LoggedUser } from '../../models/LoggedUser';
+import { Login } from '../../models/Login';
+import { LoginService } from '../../services/login.service';
 declare var $: any;
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  templateUrl: 'login.component.html',
+  styleUrls: ['login.component.css']
 })
 export class LoginComponent implements OnInit {
 
@@ -28,9 +28,9 @@ export class LoginComponent implements OnInit {
     const currentUser: LoggedUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser != null) {
       if (currentUser.role === 'emp') {
-        this.router.navigate(['employeeDashboard']);
+        this.router.navigate(['/employeeDashboard']);
       } else if (currentUser.role === 'man') {
-        this.router.navigate(['managerDashboard']);
+        this.router.navigate(['/managerDashboard']);
       }
     }
   }
@@ -58,7 +58,19 @@ export class LoginComponent implements OnInit {
   }
 
   forgotPassword() {
-    
+    if (this.loginForm.get('email').invalid) {
+      $('#forgotPasswordMessage').html('Please enter valid Email !');
+      $('#forgotPasswordNoEmail').modal('show');
+      setTimeout(function() {
+        $('#forgotPasswordNoEmail').modal('hide');
+      }, 1000);
+    } else if (this.loginForm.get('email').valid){
+      $('#forgotPasswordMessage').html('Password has been sent to your Email!');
+      $('#forgotPasswordNoEmail').modal('show');
+      setTimeout(function() {
+        $('#forgotPasswordNoEmail').modal('hide');
+      }, 1000);
+    }
   }
 
 }
