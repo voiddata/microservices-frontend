@@ -1,0 +1,64 @@
+<div class="container my-2 w-50">
+    <br>
+    <h1 class="display-5 text-center">Leave Request Form</h1>
+    <br>
+    <br>
+    <form [formGroup]="leaveRequestForm" (ngSubmit)="requestLeave()">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="fname">No.of.days</label>
+                <input type="text" class="form-control" id="days" formControlName="days"
+                    (change)="setMaxDays($event.target.value)">
+                <div *ngIf="leaveRequestForm.get('days').invalid && (leaveRequestForm.get('days').dirty || leaveRequestForm.get('days').touched)"
+                    class="alert alert-danger mt-1 p-0 text-center">
+
+                    <div *ngIf="leaveRequestForm.get('days').errors.required">
+                        No.of.days is required.
+                    </div>
+                    <div *ngIf="leaveRequestForm.get('days').errors.max">
+                        Not more than 3 days
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="fname">Reason</label>
+                <input type="text" class="form-control" id="reason" formControlName="reason">
+                <div *ngIf="leaveRequestForm.get('reason').invalid && (leaveRequestForm.get('reason').dirty || leaveRequestForm.get('reason').touched)"
+                    class="alert alert-danger mt-1 p-0 text-center">
+
+                    <div *ngIf="leaveRequestForm.get('reason').errors.required">
+                        Reason is required.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-6 mx-auto">
+                <label for="fname">Select Dates</label>
+                <input type="text" class="form-control" id="dates" formControlName="dates">
+                <div *ngIf="leaveRequestForm.get('dates').invalid && (leaveRequestForm.get('dates').dirty || leaveRequestForm.get('dates').touched)"
+                    class="alert alert-danger mt-1 p-0 text-center">
+
+                    <div *ngIf="leaveRequestForm.get('dates').errors.required">
+                        Dates are required.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <button type="submit" class="btn btn-primary mx-auto" [disabled]="leaveRequestForm.invalid"
+                data-toggle="modal" data-target="#exampleModalCenter">SUBMIT REQUEST</button>
+        </div>
+    </form>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="result" tabindex="-1" role="dialog" aria-labelledby="result"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center" id="resultMsg">
+            </div>
+        </div>
+    </div>
+</div>

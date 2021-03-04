@@ -89,12 +89,24 @@
             <div class="custom-control custom-radio custom-control-inline">
                 <input type="radio" class="custom-control-input" id="emp" name="role" value="emp"
                     formControlName="role">
-                <label class="custom-control-label" for="emp">Employee</label>
+                <label class="custom-control-label" for="emp" (click)="inputManagerID()">Employee</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
                 <input type="radio" class="custom-control-input" id="man" name="role" value="man"
                     formControlName="role">
-                <label class="custom-control-label" for="man">Manager</label>
+                <label class="custom-control-label" for="man" (click)="dontInputManagerID()">Manager</label>
+            </div>
+        </div>
+
+        <div class="form-group" *ngIf="getManagerId">
+            <label for="managerId">Manager ID</label>
+            <input type="text" class="form-control" id="managerId" formControlName="managerId">
+            <div *ngIf="registerForm.get('managerId').invalid && (registerForm.get('managerId').dirty || registerForm.get('managerId').touched)"
+                class="alert alert-danger mt-1 p-0 text-center">
+
+                <div *ngIf="registerForm.get('managerId').errors.required">
+                    Manager ID is required.
+                </div>
             </div>
         </div>
 

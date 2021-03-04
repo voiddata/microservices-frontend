@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Register } from '../../models/Register';
 import { RegisterService } from '../../services/register.service';
 
@@ -13,8 +13,9 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder, private registerService: RegisterService) { }
 
   result: string = '';
+  getManagerId: boolean = false;
 
-  registerForm: AbstractControl = this.fb.group({
+  registerForm: FormGroup = this.fb.group({
     fname: ['', [Validators.required, Validators.minLength(5)]],
     lname: ['', [Validators.required, Validators.minLength(5)]],
     email: ['' , [Validators.required, Validators.email]],
@@ -37,6 +38,10 @@ export class RegisterComponent implements OnInit {
     register.email = this.registerForm.get('email').value;
     register.password = this.registerForm.get('pwd').value;
     register.role = this.registerForm.get('role').value;
+    if (this.registerForm.get('managerId') != null) {
+      register.managerId = this.registerForm.get('managerId').value;
+    }
+    console.log(register);
 
     this.registerService.register(register).subscribe(response => {
       console.log(response);
@@ -70,6 +75,16 @@ export class RegisterComponent implements OnInit {
           return cpwd.setErrors(null);
       }
     };
+  }
+
+  inputManagerID() {
+    this.getManagerId = true;
+    this.registerForm.addControl('managerId', new FormControl('', Validators.required));
+  }
+
+  dontInputManagerID() {
+    this.getManagerId = false;
+    this.registerForm.removeControl('managerId');
   }
 
 }

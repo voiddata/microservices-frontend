@@ -9,6 +9,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { EmpdashboardComponent } from './components/empdashboard/empdashboard.component';
 import { MandashboardComponent } from './components/mandashboard/mandashboard.component';
+import { LeaverequestComponent } from './components/leaverequest/leaverequest.component';
+import { LeaveapprovalComponent } from './components/leaveapproval/leaveapproval.component';
+import { LeavehistoryComponent } from './components/leavehistory/leavehistory.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { MandashboardComponent } from './components/mandashboard/mandashboard.co
     RegisterComponent,
     LoginComponent,
     EmpdashboardComponent,
-    MandashboardComponent
+    MandashboardComponent,
+    LeaverequestComponent,
+    LeaveapprovalComponent,
+    LeavehistoryComponent
   ],
   imports: [
     BrowserModule,

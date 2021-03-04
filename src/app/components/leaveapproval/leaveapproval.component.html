@@ -1,0 +1,26 @@
+<div class="container mt-3 w-50">
+    <div class="card text-center" *ngFor="let req of res">
+        <div class="card-body">
+            <h4 class="card-title text-success">{{req.reason}}</h4>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p class="card-text text-info">
+                        {{req.employeeMail}}
+                    </p>
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-secondary" *ngFor="let d of req.dates">
+                        {{d}}
+                    </div>
+                </div>
+                
+            </div>
+            <br>
+            <div class="row">
+                <button class="btn btn-outline-primary mx-auto" (click)="approve(req.recordId)">APPROVE LEAVE REQUEST</button>
+            </div>
+
+        </div>
+    </div>
+</div>

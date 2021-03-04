@@ -10,7 +10,7 @@ import { LoggedUser } from '../models/LoggedUser';
 export class LoginService {
 
 
-  private _user: LoggedUser = new LoggedUser();
+  private _user: LoggedUser;
 
   get user() {
     return this._user;
@@ -20,16 +20,11 @@ export class LoginService {
     this._user = user;
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { this._user = new LoggedUser(); }
 
   login(login: Login): Observable<any> {
     let url = "http://localhost:8080/login";
     return this.http.post(url, login); 
-  }
-
-  forgotPassword(email: string): Observable<any> {
-    let url = "http://localhost:8080/forgotPassword";
-    return this.http.post(url, email);
   }
 
 }
