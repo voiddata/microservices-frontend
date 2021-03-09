@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Leave } from 'src/app/models/Leave';
-import { LeaverequestService } from 'src/app/services/leaverequest.service';
+import { EmployeeService } from 'src/app/services/employee.service';
 declare var $: any;
 
 @Component({
@@ -11,7 +11,7 @@ declare var $: any;
 })
 export class LeaverequestComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private leaveRequestService: LeaverequestService) { }
+  constructor(private fb: FormBuilder, private employeeService: EmployeeService) { }
 
   leaveRequestForm: FormGroup;
   datesToBeDisabled: Date[] = new Array<Date>();
@@ -27,7 +27,7 @@ export class LeaverequestComponent implements OnInit {
     let email = JSON.parse(localStorage.getItem('currentUser')).email;
     let dates;
 
-    this.leaveRequestService.getLeaveDates(email).subscribe(response => {
+    this.employeeService.getLeaveDates(email).subscribe(response => {
       dates = response;
       dates.forEach(element => {
         this.datesToBeDisabled.push(new Date(element));
@@ -54,7 +54,7 @@ export class LeaverequestComponent implements OnInit {
     leave.userMail = JSON.parse(localStorage.getItem('currentUser')).email;
     leave.reason = this.leaveRequestForm.get('reason').value;
 
-    this.leaveRequestService.requestLeave(leave).subscribe(response => {
+    this.employeeService.requestLeave(leave).subscribe(response => {
       $('#resultMsg').html(response.message);
       $('#result').modal('show');
       setTimeout(function () {

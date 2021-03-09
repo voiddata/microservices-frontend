@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LeaverequestService } from 'src/app/services/leaverequest.service';
+import { ManagerService } from 'src/app/services/manager.service';
 
 @Component({
   selector: 'app-leaveapproval',
@@ -10,18 +10,18 @@ export class LeaveapprovalComponent implements OnInit {
 
   res: any;
 
-  constructor(private leaveRequestService: LeaverequestService) { }
+  constructor(private managerService: ManagerService) { }
 
   ngOnInit(): void {
     let e = JSON.parse(localStorage.getItem('currentUser')).email;
-    this.leaveRequestService.getRequestList(e).subscribe(response => {
+    this.managerService.getRequestList(e).subscribe(response => {
       this.res = response;
       console.log(response);
     });
   }
 
   approve(id: number) {
-    this.leaveRequestService.approve(id).subscribe(response => {
+    this.managerService.approve(id).subscribe(response => {
       window.location.reload();
     });
   }

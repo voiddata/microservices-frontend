@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Register } from '../../models/Register';
-import { RegisterService } from '../../services/register.service';
+import { GenericService } from '../../services/generic.service';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +10,7 @@ import { RegisterService } from '../../services/register.service';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private registerService: RegisterService) { }
+  constructor(private fb: FormBuilder, private genericService: GenericService) { }
 
   result: string = '';
   getManagerId: boolean = false;
@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
     }
     console.log(register);
 
-    this.registerService.register(register).subscribe(response => {
+    this.genericService.register(register).subscribe(response => {
       console.log(response);
       if (response.status === 'SUCCESS') {
         this.result = response.message;

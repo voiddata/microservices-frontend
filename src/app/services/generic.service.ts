@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Login } from '../models/Login';
 import { LoggedUser } from '../models/LoggedUser';
+import { Login } from '../models/Login';
+import { Register } from '../models/Register';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
-
+export class GenericService {
 
   private _user: LoggedUser;
 
@@ -23,8 +23,12 @@ export class LoginService {
   constructor(private http: HttpClient) { this._user = new LoggedUser(); }
 
   login(login: Login): Observable<any> {
-    let url = "http://localhost:8080/login";
+    let url = "http://localhost:8765/generic-service/login";
     return this.http.post(url, login); 
   }
 
+  register(register: Register) : Observable<any> {
+    let url = "http://localhost:8765/generic-service/register";
+    return this.http.post(url, register); 
+  }
 }

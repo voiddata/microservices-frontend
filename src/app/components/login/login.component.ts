@@ -3,7 +3,7 @@ import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoggedUser } from '../../models/LoggedUser';
 import { Login } from '../../models/Login';
-import { LoginService } from '../../services/login.service';
+import { GenericService } from '../../services/generic.service';
 declare var $: any;
 
 @Component({
@@ -13,7 +13,7 @@ declare var $: any;
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) { }
+  constructor(private fb: FormBuilder, private genericService: GenericService, private router: Router) { }
 
 
   result: string = '';
@@ -42,12 +42,12 @@ export class LoginComponent implements OnInit {
     login.password = this.loginForm.get('pwd').value;
     login.role = this.loginForm.get('role').value;
 
-    this.loginService.login(login).subscribe(response => {
+    this.genericService.login(login).subscribe(response => {
       console.log(response);
       if (response.status === 'SUCCESS') {
         this.result = response.message;
 
-        this.loginService.user = response.loggedUser;
+        this.genericService.user = response.loggedUser;
         localStorage.setItem('currentUser', JSON.stringify(response.loggedUser));
 
         if (response.loggedUser.role === 'emp') {

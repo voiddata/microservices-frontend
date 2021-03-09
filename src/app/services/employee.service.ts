@@ -6,34 +6,22 @@ import { Leave } from '../models/Leave';
 @Injectable({
   providedIn: 'root'
 })
-export class LeaverequestService {
+export class EmployeeService {
 
   constructor(private http: HttpClient) { }
 
   requestLeave(leave: Leave): Observable<any> {
-    let url = "http://localhost:8080/requestLeave";
+    let url = "http://localhost:8765/employee-service/requestLeave";
     return this.http.post(url, leave); 
   }
 
   getLeaveDates(email: string): Observable<any> {
-    let url = "http://localhost:8080/getLeaveDates/"+email;
+    let url = "http://localhost:8765/employee-service/getLeaveDates/"+email;
     return this.http.get(url);
   }
 
   getHistory(email: string): Observable<any> {
-    let url = "http://localhost:8080/getHistory/"+email;
+    let url = "http://localhost:8765/employee-service/getHistory/"+email;
     return this.http.get(url);
   }
-
-  getRequestList(email: string): Observable<any> {
-    let url = "http://localhost:8080/getRequestList/"+email;
-    return this.http.get(url);
-  }
-
-  approve(id: number): Observable<any> {
-    let url = "http://localhost:8080/approve";
-    return this.http.post(url, id); 
-  }
-
-  
 }
